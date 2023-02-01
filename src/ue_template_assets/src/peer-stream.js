@@ -83,9 +83,6 @@ class PeerStream extends HTMLVideoElement {
 
     // this.setupVideo();
  
-
-
-
     this.addEventListener("loadeddata", (e) => {
       this.style["aspect-ratio"] = this.videoWidth / this.videoHeight;
     });

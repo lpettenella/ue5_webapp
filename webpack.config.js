@@ -84,7 +84,6 @@ module.exports = {
     filename: "[name].js",
     path: path.join(__dirname, "dist", frontendDirectory),
   },
-
   // Depending in the language or framework you are using for
   // front-end development, add module loaders to the default
   // webpack configuration. For example, if you are using React
@@ -125,7 +124,8 @@ module.exports = {
         },
       },
     },
-    hot: true,
+    port: 3000,
+    open: true,
     watchFiles: [path.resolve(__dirname, "src", frontendDirectory)],
     liveReload: true,
   },

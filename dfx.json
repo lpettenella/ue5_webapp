@@ -1,5 +1,9 @@
 {
   "canisters": {
+    "nft": {
+      "main": "src/ue_template/nft.mo",
+      "type": "motoko"
+    },
     "ue_template": {
       "main": "src/ue_template/main.mo",
       "type": "motoko"
