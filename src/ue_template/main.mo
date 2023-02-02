@@ -29,6 +29,10 @@ actor {
     return "Hello, " # name # "!";
   };
 
+  public func greet2(name : Text) : async Text {
+    return "Stronzo, " # name # "!";
+  };
+
   private func _userExists(who: Principal): ?User {
     switch(users.get(who)) {
       case(?user) { return ?user };
@@ -36,9 +40,8 @@ actor {
     }
   };
 
-
   public shared(msg) func createUser(_name: ?Text, _surname: ?Text, _username: Text) : async UserResult {
-    switch(_userExists(msg.caller)) {
+    switch(users.get(msg.caller)) {
       case(?user) { return #Err(#UserAlreadyExists) };
       case(_) {
         let new_user : User = {
@@ -60,8 +63,8 @@ actor {
     }
   };
 
-  public query func getUsers(): async [User] {
-    Iter.toArray(Iter.map(users.entries(), func (i: (Principal, User)): User { i.1 } ))
+  public query func getUsers(): async [Principal] {
+    Iter.toArray(Iter.map(users.entries(), func (i: (Principal, User)): Principal { i.0 } ))
   };
 
   //upgrade functions 

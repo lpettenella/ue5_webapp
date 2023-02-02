@@ -19,8 +19,9 @@ export const idlFactory = ({ IDL }) => {
         [],
       ),
     'getUser' : IDL.Func([IDL.Principal], [UserResult], ['query']),
-    'getUsers' : IDL.Func([], [IDL.Vec(User)], ['query']),
+    'getUsers' : IDL.Func([], [IDL.Vec(IDL.Principal)], ['query']),
     'greet' : IDL.Func([IDL.Text], [IDL.Text], []),
+    'greet2' : IDL.Func([IDL.Text], [IDL.Text], []),
   });
 };
 export const init = ({ IDL }) => { return []; };

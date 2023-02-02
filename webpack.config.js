@@ -4,8 +4,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
-
-
 function initCanisterEnv() {
   let localCanisters, prodCanisters, canisters;
  
@@ -105,7 +103,7 @@ module.exports = {
       //...canisterEnvVariables,
       UE_TEMPLATE_CANISTER_ID: canisters["ue_template"],
       II_URL: isDevelopment        
-        ? "http://localhost:8080/#authorize"        
+        ? "http://localhost:8000/?canisterId="+process.env.INTERNET_IDENTITY_CANISTER_ID
         : "https://identity.ic0.app/#authorize",
     }),
     new webpack.ProvidePlugin({

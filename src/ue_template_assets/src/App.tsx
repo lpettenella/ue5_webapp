@@ -78,9 +78,9 @@ const App = () => {
     setPrincipal(principal)
 
     async function checkUser() {
-      const res: UserResult = await ue_template.getUser(principal)
-      // console.log("RES: ")
-      // console.log(res)
+      const res: UserResult = await actor.getUser(principal)
+      console.log("RES: ")
+      console.log(res)
     } 
 
     checkUser()
@@ -89,10 +89,11 @@ const App = () => {
 
   const createUser = async() => {
     const name = (document.getElementById("inputName") as HTMLInputElement).value
-    const res = await ue_template.createUser([], [], name)
+    console.log("waiting...")
+    const res = await actor?.createUser([], [], name)
     console.log(res)
-    console.log(res.hasOwnProperty('Err'))
-    console.log(res.hasOwnProperty('Ok'))
+    console.log(res?.hasOwnProperty('Err'))
+    console.log(res?.hasOwnProperty('Ok'))
   }
 
 	const authenticate = async() => {

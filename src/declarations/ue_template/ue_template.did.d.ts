@@ -19,6 +19,7 @@ export interface _SERVICE {
     UserResult
   >,
   'getUser' : ActorMethod<[Principal], UserResult>,
-  'getUsers' : ActorMethod<[], Array<User>>,
+  'getUsers' : ActorMethod<[], Array<Principal>>,
   'greet' : ActorMethod<[string], string>,
+  'greet2' : ActorMethod<[string], string>,
 }
