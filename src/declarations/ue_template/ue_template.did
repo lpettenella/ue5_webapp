@@ -1,3 +1,25 @@
+type UserResult = 
+ variant {
+   Err: Errors;
+   Ok: User;
+ };
+type User = 
+ record {
+   name: opt text;
+   surname: opt text;
+   username: text;
+ };
+type Errors = 
+ variant {
+   InvalidOperator;
+   TokenNotExist;
+   Unauthorized;
+   UserAlreadyExists;
+   UserDoesNotExists;
+ };
 service : {
+  createUser: (opt text, opt text, text) -> (UserResult);
+  getUser: (principal) -> (UserResult) query;
+  getUsers: () -> (vec User) query;
   greet: (text) -> (text);
 }

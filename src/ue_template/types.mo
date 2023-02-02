@@ -73,9 +73,9 @@ module {
     };
 
     public type User = {
-        var name: Text;
-        var surname: ?Text;
-        var username: ?Text;
+        name: ?Text;
+        surname: ?Text;
+        username: Text;
     };
 
     public type UserInfoExt = {
