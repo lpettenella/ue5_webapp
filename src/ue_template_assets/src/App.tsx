@@ -8,6 +8,9 @@ import Navbar from './components/Navbar'
 import PolicyModal from './components/PolicyModal'
 import { Principal } from '@dfinity/principal'
 import { useEffect, useState } from 'react'
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './components/Home'
+import Market from './components/Market'
 // import logo from './logo.png';
 
 export const AppContext = React.createContext<{
@@ -47,6 +50,7 @@ const App = () => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [principal, setPrincipal] = useState<Principal | undefined>(undefined)
 	const [modalOpen, setModalOpen] = useState(false)
+  const [user, setUser] = useState<UserResult | undefined>(undefined)
 					
 	let colorIndex = 0
 	function RandomColor(){
@@ -79,18 +83,17 @@ const App = () => {
 
     async function checkUser() {
       const res: UserResult = await actor.getUser(principal)
-      console.log("RES: ")
-      console.log(res)
+      setUser(res)
     } 
-
     checkUser()
-    
 	}, [isAuthenticated])
 
-  const createUser = async() => {
-    const name = (document.getElementById("inputName") as HTMLInputElement).value
+  const createUser = async(e: any) => {
+		e.preventDefault()
+    const name = (document.getElementById("inputUsername") as HTMLInputElement).value
     console.log("waiting...")
     const res = await actor?.createUser([], [], name)
+		setUser(res)
     console.log(res)
     console.log(res?.hasOwnProperty('Err'))
     console.log(res?.hasOwnProperty('Ok'))
@@ -107,26 +110,30 @@ const App = () => {
 		await authClient?.logout()
 		setIsAuthenticated?.(false)
 	}
-	
+
 	return (
 		<>
 			<Navbar setModalOpen={setModalOpen} logout={logout} isAuthenticated={isAuthenticated}/>
 			<PolicyModal modalOpen={modalOpen} setModalOpen={setModalOpen} authenticate={authenticate}/>
-			{ isAuthenticated && 
-			<div>
-
-        <p>{authClient?.getIdentity().getPrincipal() + ""}</p>
-
-				{/* <script src="peer-stream.js"></script>
-				<video is="peer-stream" ref={elm => elm && elm.setAttribute('signal', 'ws://localhost:88')} >
-						<track default kind="captions" srcLang="en" />
-				</video> */}
+			<Routes>
+        <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} createUser={createUser} />} />
+        <Route path="/market" element={<Market isAuthenticated={isAuthenticated} />} />
+        {/* <Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
+        <Route path="/token/:id" element={<Token isAuthenticated={isAuthenticated} />} /> */}
+      </Routes>
+			{/* <Home isAuthenticated={isAuthenticated} user={user} createUser={createUser} /> */}
 
 
-        <input type="text" id="inputName" placeholder="place your name"></input>
-        <button onClick={ () => createUser() }>Submit</button>
+			{/* <div className="iitext">
+				Your internet identity: {authClient?.getIdentity().getPrincipal() + ""}
+			</div> */}
 
-{/* 
+			<script src="peer-stream.js"></script>
+			<video is="peer-stream" ref={elm => elm && elm.setAttribute('signal', 'ws://localhost:88')} >
+					<track default kind="captions" srcLang="en" />
+			</video>
+			
+
 				<button onClick={async(e) => {
           let button = e.currentTarget.classList
           button.add("disabled")
@@ -140,10 +147,8 @@ const App = () => {
           SendToUE("direct_response@" + color)
           e.currentTarget.className = ""
           e.currentTarget.classList.add(color)                    
-        }}>Change Color</button> */}
+        }}>Change Color</button>
         
-			</div>
-			}
 		</>
 		// <AppContext.Provider value={{ authClient, setIsAuthenticated, actor }}>
 		// 	<main>

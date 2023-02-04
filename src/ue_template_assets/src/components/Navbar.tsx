@@ -9,7 +9,7 @@ type NavbarProps = {
 function Navbar({ setModalOpen, logout, isAuthenticated }: NavbarProps) {
   return (
     <div className="navbar">
-      <div className="title">DfiniVerse</div>
+      <div className="title">LucidDoor</div>
       <div className="links">
         <a>DOCS</a>
         <a>COMMUNITY</a>

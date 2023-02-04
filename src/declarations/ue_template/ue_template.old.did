@@ -19,7 +19,7 @@ type Errors =
  };
 service : {
   createUser: (opt text, opt text, text) -> (UserResult);
-  getUser: (principal) -> (UserResult) query;
+  getUser: (principal) -> (opt User) query;
   getUsers: () -> (vec principal) query;
   greet: (text) -> (text);
   greet2: (text) -> (text);
