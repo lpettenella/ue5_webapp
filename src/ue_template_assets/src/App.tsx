@@ -128,7 +128,7 @@ const App = () => {
 				Your internet identity: {authClient?.getIdentity().getPrincipal() + ""}
 			</div> */}
 
-			<script src="peer-stream.js"></script>
+			{/* <script src="peer-stream.js"></script>
 			<video is="peer-stream" ref={elm => elm && elm.setAttribute('signal', 'ws://localhost:88')} >
 					<track default kind="captions" srcLang="en" />
 			</video>
@@ -147,7 +147,7 @@ const App = () => {
           SendToUE("direct_response@" + color)
           e.currentTarget.className = ""
           e.currentTarget.classList.add(color)                    
-        }}>Change Color</button>
+        }}>Change Color</button> */}
         
 		</>
 		// <AppContext.Provider value={{ authClient, setIsAuthenticated, actor }}>

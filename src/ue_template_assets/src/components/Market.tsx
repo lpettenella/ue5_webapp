@@ -2,9 +2,11 @@ import React from 'react'
 
 function Market({ isAuthenticated }: any) {
   return (
-    <div>
-      Market
-    </div>
+    isAuthenticated ? (
+      <div>
+        Market
+      </div>
+    ) : (<div> You're not authenticated! Turn back!</div>)
   )
 }
 
