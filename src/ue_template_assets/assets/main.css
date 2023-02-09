@@ -339,23 +339,60 @@ a:hover {
   color: #F7F99E;
 }
 
-/* .home-row {
+.app-body {
   display: flex;
-  flex: auto;
-  width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  background: rgba(16, 16, 16, 0.82);
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2vh;
+  margin-left: 5vh;
+  margin-right: 5vh;
+  margin-bottom: 5vh;
 }
 
-.home-row div {
+/* MARKET */
+
+
+.market-navbar {
   display: flex;
-  justify-content: center;
+  margin: 2vh;
+  justify-content: space-between;
+}
+
+.market-navbar div {
+  display: flex;
   align-items: center;
-  width: 50%;
-  min-width: 400px;
-  box-sizing:border-box;
-  border: 1px solid white;
-} */
+}
+
+.mrk-links {
+  gap: 2vh;
+}
+
+.mrk-links div:hover {
+  cursor: pointer;
+}
+
+.create-nft-btn:hover {
+  cursor: pointer;
+  color: #FFE073;
+}
+
+.market-navbar-btn.selected {
+  color: #FFE073;
+}
+
+.add-button {
+  display: flex;
+  background-color: lightblue;
+  color: white;
+}
+
+.add-button-plus {
+  /* font-size: 5vh; */
+}
 
 @keyframes shine {
   0% {

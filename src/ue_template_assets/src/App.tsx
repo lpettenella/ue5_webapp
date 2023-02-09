@@ -10,7 +10,8 @@ import { Principal } from '@dfinity/principal'
 import { useEffect, useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home'
-import Market from './components/Market'
+import Market from './pages/Market'
+import Create from './pages/Create'
 // import logo from './logo.png';
 
 export const AppContext = React.createContext<{
@@ -90,9 +91,11 @@ const App = () => {
 
   const createUser = async(e: any) => {
 		e.preventDefault()
-    const name = (document.getElementById("inputUsername") as HTMLInputElement).value
+		const name = (document.getElementById("inputName") as HTMLInputElement).value
+		const surname = (document.getElementById("inputSurname") as HTMLInputElement).value
+    const username = (document.getElementById("inputUsername") as HTMLInputElement).value
     console.log("waiting...")
-    const res = await actor?.createUser([], [], name)
+    const res = await actor?.createUser([name], [surname], username)
 		setUser(res)
     console.log(res)
     console.log(res?.hasOwnProperty('Err'))
@@ -118,6 +121,7 @@ const App = () => {
 			<Routes>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} createUser={createUser} />} />
         <Route path="/market" element={<Market isAuthenticated={isAuthenticated} />} />
+				<Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
         {/* <Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
         <Route path="/token/:id" element={<Token isAuthenticated={isAuthenticated} />} /> */}
       </Routes>
@@ -131,10 +135,10 @@ const App = () => {
 			{/* <script src="peer-stream.js"></script>
 			<video is="peer-stream" ref={elm => elm && elm.setAttribute('signal', 'ws://localhost:88')} >
 					<track default kind="captions" srcLang="en" />
-			</video>
+			</video> */}
 			
 
-				<button onClick={async(e) => {
+				{/* <button onClick={async(e) => {
           let button = e.currentTarget.classList
           button.add("disabled")
           SendToUE("direct_response@call")                      
