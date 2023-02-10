@@ -2,36 +2,33 @@ import React, { useEffect, useState } from 'react'
 import { SendToUE } from '../peer-stream';
 
 function Create({isAuthenticated}: any) {
-  const [file, setFile] = useState<File | null>(null);
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState('');
+  const [file, setFile] = useState<File | undefined>(undefined);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
-    setFile(selectedFile!)
-  
-    if (selectedFile) {
-      setUrl(URL.createObjectURL(selectedFile))
-    }
-  }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    setFile(file!);
+  };
 
-  return(
-    <div className="app-body">
-      <div>
-        <input type="file" onChange={handleChange} />
-        {file && (
-          <div>
-            <a href={url}>{url}</a>
-            <button id="change_color_btn" onClick={(e) => {
-              let button = e.currentTarget.classList
-              button.add("disabled")
-              SendToUE("data_response@" + url)
-              button.remove("disabled")               
-            }}>Change Color</button>
-          </div>
-        )}
-      </div>
+  useEffect(() => {
+    if (!file) return 
+
+    const url = URL.createObjectURL(new Blob([file], { type: 'model/gltf-binary' }))
+    setUrl(url);
+    
+  }, [file]);
+
+  return (
+    <div>
+      <input type="file" onChange={handleChange} />
+      {url && (
+        <a href={url}>
+          Download
+          {file?.name}
+        </a>
+      )}
     </div>
-  )
+  );
 }
 
 export default Create
