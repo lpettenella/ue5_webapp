@@ -60,7 +60,7 @@ module.exports = {
     // The frontend.entrypoint points to the HTML file for this build, so we need
     // to replace the extension to `.js`.
     index: path.join(__dirname, asset_entry).replace(/\.html$/, ".tsx"),
-    peer_stream: path.join(__dirname, "src", frontendDirectory, "src", "peer-stream.js"),
+    // peer_stream: path.join(__dirname, "src", frontendDirectory, "src", "peer-stream.js"),
     
   },
   devtool: isDevelopment ? "source-map" : false,

@@ -12,6 +12,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Home from './components/Home'
 import Market from './pages/Market'
 import Create from './pages/Create'
+import TestThree from './pages/TestThree'
 // import logo from './logo.png';
 
 export const AppContext = React.createContext<{
@@ -94,12 +95,8 @@ const App = () => {
 		const name = (document.getElementById("inputName") as HTMLInputElement).value
 		const surname = (document.getElementById("inputSurname") as HTMLInputElement).value
     const username = (document.getElementById("inputUsername") as HTMLInputElement).value
-    console.log("waiting...")
     const res = await actor?.createUser([name], [surname], username)
 		setUser(res)
-    console.log(res)
-    console.log(res?.hasOwnProperty('Err'))
-    console.log(res?.hasOwnProperty('Ok'))
   }
 
 	const authenticate = async() => {
@@ -121,7 +118,8 @@ const App = () => {
 			<Routes>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} createUser={createUser} />} />
         <Route path="/market" element={<Market isAuthenticated={isAuthenticated} />} />
-				<Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
+				<Route path="/create" element={<Create isAuthenticated={isAuthenticated} actor={actor} principal={principal}/>} />
+				<Route path="/test" element={<TestThree actor={actor} principal={principal}/>}></Route>
         {/* <Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
         <Route path="/token/:id" element={<Token isAuthenticated={isAuthenticated} />} /> */}
       </Routes>

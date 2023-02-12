@@ -1,13 +1,45 @@
 type UserResult = 
  variant {
    Err: Errors;
-   Ok: User;
+   Ok: UserExt;
  };
-type User = 
+type UserExt = 
  record {
    name: opt text;
    surname: opt text;
+   tokens: vec nat;
    username: text;
+ };
+type TokenMetadata = 
+ record {
+   attributes: vec Attribute;
+   filetype: text;
+   location: Location;
+   name: text;
+ };
+type TokenInfoExt = 
+ record {
+   index: nat;
+   metadata: opt TokenMetadata;
+   operator: opt principal;
+   owner: principal;
+   timestamp: Time;
+ };
+type Time = int;
+type MintResult = 
+ variant {
+   Err: Errors;
+   Ok: nat;
+ };
+type Location = 
+ variant {
+   AssetCanister: record {
+                    principal;
+                    blob;
+                  };
+   IPFS: text;
+   InCanister: blob;
+   Web: text;
  };
 type Errors = 
  variant {
@@ -17,10 +49,16 @@ type Errors =
    UserAlreadyExists;
    UserDoesNotExists;
  };
+type Attribute = 
+ record {
+   key: text;
+   value: text;
+ };
 service : {
   createUser: (opt text, opt text, text) -> (UserResult);
   getUser: (principal) -> (UserResult) query;
+  getUserTokens: (principal) -> (vec TokenInfoExt) query;
   getUsers: () -> (vec principal) query;
   greet: (text) -> (text);
-  greet2: (text) -> (text);
+  mintToken: (bool, text, blob, text) -> (MintResult);
 }

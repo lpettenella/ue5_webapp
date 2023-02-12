@@ -8,6 +8,7 @@
 
 import Time "mo:base/Time";
 import TrieSet "mo:base/TrieSet";
+import Text "mo:base/Text";
 
 module {
     public type Metadata = {
@@ -73,9 +74,17 @@ module {
     };
 
     public type User = {
+        var name: ?Text;
+        var surname: ?Text;
+        var username: Text;
+        var tokens: TrieSet.Set<Nat>;
+    };
+
+    public type UserExt = {
         name: ?Text;
         surname: ?Text;
         username: Text;
+        tokens: [Nat];
     };
 
     public type UserInfoExt = {
