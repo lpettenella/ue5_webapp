@@ -46,6 +46,12 @@ export async function ReceivedFromUnreal(detail : string){
 	}
 }
 
+type Auth = {
+	isAuthenticated: boolean,
+	principal: Principal,
+	actor: ActorSubclass<_SERVICE>
+}
+
 const App = () => {
 	const [authClient, setAuthClient] = useState<AuthClient | undefined>(undefined)
 	const [actor, setActor] = useState<ActorSubclass<_SERVICE> | undefined>(undefined)        
@@ -66,25 +72,24 @@ const App = () => {
 	useEffect(() => {
 		AuthClient.create().then(async (client)=>{
 			setAuthClient(client)
-			setIsAuthenticated(await client.isAuthenticated());               
+			setIsAuthenticated(await client.isAuthenticated());      
+			const identity = client.getIdentity()
+			const principal = client.getIdentity().getPrincipal()
+			const actor = createActor(canisterId as string, {
+				agentOptions: {
+						identity
+				}
+			})
+			setActor(actor)
+			setPrincipal(principal)         
 		})
 	}, [])
 
 	useEffect(() => {
 		if(!authClient) return
 
-		const identity = authClient.getIdentity()
-    const principal = authClient.getIdentity().getPrincipal()
-		const actor = createActor(canisterId as string, {
-				agentOptions: {
-						identity
-				}
-		})
-		setActor(actor)
-    setPrincipal(principal)
-
     async function checkUser() {
-      const res: UserResult = await actor.getUser(principal)
+      const res: UserResult = await actor!.getUser(principal!)
       setUser(res)
     } 
     checkUser()
@@ -95,7 +100,7 @@ const App = () => {
 		const name = (document.getElementById("inputName") as HTMLInputElement).value
 		const surname = (document.getElementById("inputSurname") as HTMLInputElement).value
     const username = (document.getElementById("inputUsername") as HTMLInputElement).value
-    const res = await actor?.createUser([name], [surname], username)
+    const res = await actor?.createUser([name], [surname], [username])
 		setUser(res)
   }
 
@@ -114,12 +119,12 @@ const App = () => {
 	return (
 		<>
 			<Navbar setModalOpen={setModalOpen} logout={logout} isAuthenticated={isAuthenticated}/>
-			<PolicyModal modalOpen={modalOpen} setModalOpen={setModalOpen} authenticate={authenticate}/>
+			<PolicyModal authenticate={authenticate} modalOpen={modalOpen} setModalOpen={setModalOpen} />
 			<Routes>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} createUser={createUser} />} />
-        <Route path="/market" element={<Market isAuthenticated={isAuthenticated} />} />
-				<Route path="/create" element={<Create isAuthenticated={isAuthenticated} actor={actor} principal={principal}/>} />
-				<Route path="/test" element={<TestThree actor={actor} principal={principal}/>}></Route>
+        <Route path="/market" element={<Market isAuthenticated={isAuthenticated} actor={actor} principal={principal} />} />
+				<Route path="/create" element={<Create isAuthenticated={isAuthenticated} actor={actor} principal={principal} />} />
+				<Route path="/test" element={<TestThree principal={principal} actor={actor} />}></Route>
         {/* <Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
         <Route path="/token/:id" element={<Token isAuthenticated={isAuthenticated} />} /> */}
       </Routes>

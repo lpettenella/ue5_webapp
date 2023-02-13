@@ -76,14 +76,14 @@ module {
     public type User = {
         var name: ?Text;
         var surname: ?Text;
-        var username: Text;
+        var username: ?Text;
         var tokens: TrieSet.Set<Nat>;
     };
 
     public type UserExt = {
         name: ?Text;
         surname: ?Text;
-        username: Text;
+        username: ?Text;
         tokens: [Nat];
     };
 

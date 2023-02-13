@@ -394,6 +394,22 @@ a:hover {
   /* font-size: 5vh; */
 }
 
+/* NFTs Body */
+
+.nfts-body {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nfts-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.nfts-cards {
+  display: flex;
+}
+
 @keyframes shine {
   0% {
     background: linear-gradient(

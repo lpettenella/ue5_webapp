@@ -28,7 +28,7 @@ export interface TokenMetadata {
   'location' : Location,
 }
 export interface UserExt {
-  'username' : string,
+  'username' : [] | [string],
   'name' : [] | [string],
   'surname' : [] | [string],
   'tokens' : Array<bigint>,
@@ -37,7 +37,7 @@ export type UserResult = { 'Ok' : UserExt } |
   { 'Err' : Errors };
 export interface _SERVICE {
   'createUser' : ActorMethod<
-    [[] | [string], [] | [string], string],
+    [[] | [string], [] | [string], [] | [string]],
     UserResult
   >,
   'getUser' : ActorMethod<[Principal], UserResult>,

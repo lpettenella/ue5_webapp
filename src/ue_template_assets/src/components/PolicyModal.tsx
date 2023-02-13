@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 
 type PolicyModalProps = {
-  authenticate: Function
+  authenticate: any
   modalOpen: any
   setModalOpen: any
 }

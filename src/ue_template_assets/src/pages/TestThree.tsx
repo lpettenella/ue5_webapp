@@ -38,6 +38,7 @@ function TestThree({actor, principal}: any) {
       
       loader.parse(arraybuffer, "", (glb) => {
         scene.add(glb.scene)
+        scene.background = new THREE.Color( "#f0f8ff" );
       })
     }
     parseFile()

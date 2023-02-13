@@ -1,6 +1,6 @@
 export const idlFactory = ({ IDL }) => {
   const UserExt = IDL.Record({
-    'username' : IDL.Text,
+    'username' : IDL.Opt(IDL.Text),
     'name' : IDL.Opt(IDL.Text),
     'surname' : IDL.Opt(IDL.Text),
     'tokens' : IDL.Vec(IDL.Nat),
@@ -37,7 +37,7 @@ export const idlFactory = ({ IDL }) => {
   const MintResult = IDL.Variant({ 'Ok' : IDL.Nat, 'Err' : Errors });
   return IDL.Service({
     'createUser' : IDL.Func(
-        [IDL.Opt(IDL.Text), IDL.Opt(IDL.Text), IDL.Text],
+        [IDL.Opt(IDL.Text), IDL.Opt(IDL.Text), IDL.Opt(IDL.Text)],
         [UserResult],
         [],
       ),

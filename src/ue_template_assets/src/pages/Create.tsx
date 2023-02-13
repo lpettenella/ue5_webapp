@@ -28,7 +28,6 @@ function Create({isAuthenticated, actor, principal}: any) {
 
   const getNfts = async() => {
     const res = await actor.getUserTokens(principal)
-    console.log(res)
     const arraybuffer = res[0].metadata[0].location.InCanister
     const file = new File([arraybuffer], "test.glb");
     // const url = URL.createObjectURL(new Blob([file], { type: 'application/gltf-binary' }))

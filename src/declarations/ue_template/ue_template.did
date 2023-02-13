@@ -8,7 +8,7 @@ type UserExt =
    name: opt text;
    surname: opt text;
    tokens: vec nat;
-   username: text;
+   username: opt text;
  };
 type TokenMetadata = 
  record {
@@ -55,7 +55,7 @@ type Attribute =
    value: text;
  };
 service : {
-  createUser: (opt text, opt text, text) -> (UserResult);
+  createUser: (opt text, opt text, opt text) -> (UserResult);
   getUser: (principal) -> (UserResult) query;
   getUserTokens: (principal) -> (vec TokenInfoExt) query;
   getUsers: () -> (vec principal) query;

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import NFTs from '../components/NFTs'
 
 enum NavbarLinks {
   NFTS = "NFTs",
@@ -7,7 +8,7 @@ enum NavbarLinks {
   USERS = "Users"
 }
 
-function Market({ isAuthenticated }: any) {
+function Market({ isAuthenticated, actor, principal}: any) {
 
   const [activeSection, setActiveSection] = useState<string>(NavbarLinks.NFTS)
 
@@ -18,7 +19,7 @@ function Market({ isAuthenticated }: any) {
 
   const loadComponent = () => {
     switch (activeSection) {
-      case NavbarLinks.NFTS: return <div>NFTs</div>;
+      case NavbarLinks.NFTS: return <NFTs actor={actor} principal={principal} />;
       case NavbarLinks.COLLECTIONS: return <div>Collections</div>;
       default: return <div>Invalid option</div>;
     }

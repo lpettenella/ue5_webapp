@@ -81,28 +81,45 @@ actor {
       case (?x_) { x_ };
   };
 
-  private func _userExists(who: Principal): ?User {
+  private func _getUser(who: Principal): ?User {
     switch(users.get(who)) {
       case(?user) { return ?user };
       case(_) { return null };
     }
   };
 
+  private func _newUser() : User {
+    {
+      var name = null;
+      var surname = null;
+      var username = null;
+      var tokens = TrieSet.empty<Nat>();
+    }
+  };
+
   private func _addTokenTo(to: Principal, tokenId: Nat) {
-      switch(users.get(to)) {
-          case (?user) {
-              user.tokens := TrieSet.put(user.tokens, tokenId, Hash.hash(tokenId), Nat.equal);
-              users.put(to, user);
-          };
-          case _ {
-              return;
-          };
-      }
+    switch(users.get(to)) {
+      case (?user) {
+        user.tokens := TrieSet.put(user.tokens, tokenId, Hash.hash(tokenId), Nat.equal);
+        users.put(to, user);
+      };
+      case _ {
+        let user = _newUser();
+        user.tokens := TrieSet.put(user.tokens, tokenId, Hash.hash(tokenId), Nat.equal);
+        users.put(to, user);
+      };
+    }
   }; 
 
-  public shared(msg) func createUser(_name: ?Text, _surname: ?Text, _username: Text) : async UserResult {
+  public shared(msg) func createUser(_name: ?Text, _surname: ?Text, _username: ?Text) : async UserResult {
     switch(users.get(msg.caller)) {
-      case(?user) { return #Err(#UserAlreadyExists) };
+      case(?user) { 
+        user.name := _name;
+        user.surname := _surname;
+        user.username := _username;
+        users.put(msg.caller, user);
+        return #Ok(_userExt(user));
+      };
       case(_) {
         let new_user : User = {
           var name = _name;
