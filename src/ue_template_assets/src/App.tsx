@@ -141,7 +141,7 @@ const App = () => {
 			</video>
 			
 
-				{/* <button onClick={async(e) => {
+				<button onClick={async(e) => {
           let button = e.currentTarget.classList
           button.add("disabled")
           SendToUE("direct_response@call")                      
@@ -154,8 +154,17 @@ const App = () => {
           SendToUE("direct_response@" + color)
           e.currentTarget.className = ""
           e.currentTarget.classList.add(color)                    
-        }}>Change Color</button> */}
-        
+        }}>Change Color</button>
+
+      {/* <button onClick={(e) => {
+        // const testUrl = (document.getElementById("inputUrl") as HTMLInputElement).value
+        // console.log("URLLL -> " + testUrl)
+        let button = e.currentTarget.classList
+        button.add("disabled")               
+        SendToUE("data_response@" + "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF-Embedded/Duck.gltf")
+        button.remove("disabled")                      
+      }}>Send Data</button>
+         */}
 		</>
 		// <AppContext.Provider value={{ authClient, setIsAuthenticated, actor }}>
 		// 	<main>

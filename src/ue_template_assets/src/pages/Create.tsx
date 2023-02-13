@@ -9,13 +9,20 @@ type CreateProps = {
 }
 
 function Create({isAuthenticated, actor, principal}: any) {
-  const [url, setUrl] = useState('');
-  const [file, setFile] = useState<File | undefined>(undefined);
+  const [url, setUrl] = useState('')
+  const [file, setFile] = useState<File | undefined>(undefined)
+  const [testUrl, setTestUrl] = useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    setFile(file!);
-  };
+    const file = event.target.files?.[0]
+    setFile(file!)
+  }
+
+  const handleText = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const url = event.target.value
+    console.log(url)
+    setTestUrl(url)
+  }
 
   const mintNft = async() => {
     const blob = new Blob([file!],{type: "model/gltf-binary"}); 
@@ -50,14 +57,18 @@ function Create({isAuthenticated, actor, principal}: any) {
         <>
         <a id="link" href={url}> {file?.name} </a>   
         <button onClick={() => mintNft()}>Mint Nft</button>
-				<button onClick={async(e) => {
-          let button = e.currentTarget.classList
-          button.add("disabled")               
-          SendToUE("data_response@" + "https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/Duck/glTF-Binary/Duck.glb?raw=true")
-          button.remove("disabled")                      
-				}}>Send Data</button>
         </>
       )}
+      <label>Put your url</label>
+      <input id="inputUrl" type="text"></input>
+      <button onClick={async(e) => {
+        const testUrl = (document.getElementById("inputUrl") as HTMLInputElement).value
+        console.log("URLLL -> " + testUrl)
+        let button = e.currentTarget.classList
+        button.add("disabled")               
+        SendToUE("data_response@" + testUrl)
+        button.remove("disabled")                      
+      }}>Send Data</button>
       <button onClick={() => getNfts()}>Get Nfts</button>
     </div>
   );
