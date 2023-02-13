@@ -50,12 +50,12 @@ function Create({isAuthenticated, actor, principal}: any) {
         <>
         <a id="link" href={url}> {file?.name} </a>   
         <button onClick={() => mintNft()}>Mint Nft</button>
-				{/* <button onClick={async(e) => {
+				<button onClick={async(e) => {
           let button = e.currentTarget.classList
           button.add("disabled")               
-          SendToUE("data_response@" + url)
+          SendToUE("data_response@" + "https://github.com/KhronosGroup/glTF-Sample-Models/blob/master/2.0/Duck/glTF-Binary/Duck.glb?raw=true")
           button.remove("disabled")                      
-				}}>Send Data</button> */}
+				}}>Send Data</button>
         </>
       )}
       <button onClick={() => getNfts()}>Get Nfts</button>

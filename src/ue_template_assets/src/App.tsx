@@ -135,10 +135,10 @@ const App = () => {
 				Your internet identity: {authClient?.getIdentity().getPrincipal() + ""}
 			</div> */}
 
-			{/* <script src="peer-stream.js"></script>
+			<script src="peer-stream.js"></script>
 			<video is="peer-stream" ref={elm => elm && elm.setAttribute('signal', 'ws://localhost:88')} >
 					<track default kind="captions" srcLang="en" />
-			</video> */}
+			</video>
 			
 
 				{/* <button onClick={async(e) => {
