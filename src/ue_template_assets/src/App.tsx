@@ -124,7 +124,7 @@ const App = () => {
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} createUser={createUser} />} />
         <Route path="/market" element={<Market isAuthenticated={isAuthenticated} actor={actor} principal={principal} />} />
 				<Route path="/create" element={<Create isAuthenticated={isAuthenticated} actor={actor} principal={principal} />} />
-				<Route path="/test" element={<TestThree principal={principal} actor={actor} />}></Route>
+				{/* <Route path="/test" element={<TestThree principal={principal} actor={actor} />}></Route> */}
         {/* <Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
         <Route path="/token/:id" element={<Token isAuthenticated={isAuthenticated} />} /> */}
       </Routes>
@@ -141,73 +141,22 @@ const App = () => {
 			</video>
 			
 
-				<button onClick={async(e) => {
-          let button = e.currentTarget.classList
-          button.add("disabled")
-          SendToUE("direct_response@call")                      
-          SendToUE("can_response@" + await ue_template.greet("Unreal Player!"))
-          button.remove("disabled")                      
-				}}>Canister Call</button>
-
-        <button id="change_color_btn" onClick={(e) => {
-          let color = RandomColor()
-          SendToUE("direct_response@" + color)
-          e.currentTarget.className = ""
-          e.currentTarget.classList.add(color)                    
-        }}>Change Color</button>
-
-      {/* <button onClick={(e) => {
-        // const testUrl = (document.getElementById("inputUrl") as HTMLInputElement).value
-        // console.log("URLLL -> " + testUrl)
+      {/* <button onClick={async(e) => {
         let button = e.currentTarget.classList
-        button.add("disabled")               
-        SendToUE("data_response@" + "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF-Embedded/Duck.gltf")
+        button.add("disabled")
+        SendToUE("direct_response@call")                      
+        SendToUE("can_response@" + await ue_template.greet("Unreal Player!"))
         button.remove("disabled")                      
-      }}>Send Data</button>
-         */}
+      }}>Canister Call</button>
+
+      <button id="change_color_btn" onClick={(e) => {
+        let color = RandomColor()
+        SendToUE("direct_response@" + color)
+        e.currentTarget.className = ""
+        e.currentTarget.classList.add(color)                    
+      }}>Change Color</button> */}
+        
 		</>
-		// <AppContext.Provider value={{ authClient, setIsAuthenticated, actor }}>
-		// 	<main>
-		// 		{!isAuthenticated ? (
-		// 				<section>                        
-		// 						<button onClick={() => {authenticate}} >
-		// 								<a>Log in</a>
-		// 						</button> 
-		// 				</section>
-		// 		) : (
-		// 				<div>
-		// 				<script src="peer-stream.js"></script>
-		// 				<video is="peer-stream" ref={elm => elm && elm.setAttribute('signal', 'ws://localhost:88')} >
-		// 						<track default kind="captions" srcLang="en" />
-		// 				</video>
-						
-		// 				<div>Authenticated</div>
-
-						// <button onClick={async(e) => {
-						// 		let button = e.currentTarget.classList;
-						// 		button.add("disabled");
-						// 		SendToUE("direct_response@call");                        
-						// 		SendToUE("can_response@" + await ue_template.greet("Unreal Player"));
-						// 		button.remove("disabled");                        
-						// 		}}>Canister Call</button>
-
-						// <button id="change_color_btn" onClick={(e) => {
-						// 		let color = RandomColor();
-						// 		SendToUE("direct_response@" + color);
-						// 		e.currentTarget.className = "";
-						// 		e.currentTarget.classList.add(color);                    
-						// }
-						
-						// }>Change Color</button>
-						// <button onClick={async() =>{
-						// 		await authClient?.logout()
-						// 		setIsAuthenticated?.(false)
-						// }}>Log out
-						// </button>
-		// 				</div>
-		// 		)}    
-		// 	</main>
-		// </AppContext.Provider>
 	)
 }
 

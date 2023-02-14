@@ -62,11 +62,11 @@ function Create({isAuthenticated, actor, principal}: any) {
       <label>Put your url</label>
       <input id="inputUrl" type="text"></input>
       <button onClick={async(e) => {
-        const testUrl = (document.getElementById("inputUrl") as HTMLInputElement).value
-        console.log("URLLL -> " + testUrl)
+        // const testUrl = (document.getElementById("inputUrl") as HTMLInputElement).value
+        // console.log("URLLL -> " + testUrl)
         let button = e.currentTarget.classList
         button.add("disabled")               
-        SendToUE("data_response@" + testUrl)
+        SendToUE("data_response@" + "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF-Embedded/Duck.gltf")
         button.remove("disabled")                      
       }}>Send Data</button>
       <button onClick={() => getNfts()}>Get Nfts</button>
