@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 type NavbarProps = {
   setModalOpen: any
@@ -11,9 +12,9 @@ function Navbar({ setModalOpen, logout, isAuthenticated }: NavbarProps) {
     <div className="navbar">
       <div className="title">LucidDoor</div>
       <div className="links">
-        <a>Docs</a>
-        <a>Community</a>
-        <a>About</a>
+        <Link to="/market">Market</Link>
+        <a>Explore</a>
+        <a>Wallet</a>
         { !isAuthenticated?
             <a className="auth-btn" onClick={() => {setModalOpen(true)}}>Login</a> :
             <a className="auth-btn" onClick={() => {logout()}}>Logout</a>

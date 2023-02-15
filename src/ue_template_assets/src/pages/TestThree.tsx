@@ -10,12 +10,17 @@ function TestThree({nft, number}: any) {
   const [userNfts, setUserNfts] = useState<any[]>([]);
   const [loader] = useState(new GLTFLoader())
   const [scene] = useState(new THREE.Scene())
-  const [camera] = useState(new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ))
-  const [renderer] = useState(new THREE.WebGLRenderer())
+  const [camera] = useState(new THREE.PerspectiveCamera( 20, 1, 0.1, 2000 ))
+  const [renderer] = useState(new THREE.WebGLRenderer({ alpha: true }))
 
   useEffect(() => {
-    renderer.setSize( 200, 200 );
-    document.getElementById(`mesh-box${number}`)!.appendChild( renderer.domElement );
+    const canvas = renderer.domElement;
+    renderer.setSize( 200, 200);
+    document.getElementById(`mesh-box${number}`)!.appendChild( canvas );
+    
+    // Set the aspect ratio of the camera to match the aspect ratio of the canvas
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
   }, [])
   
   useEffect(() => {
@@ -23,28 +28,24 @@ function TestThree({nft, number}: any) {
     const file = new File([arraybuffer], "test.glb");
   
     const controls = new OrbitControls( camera, renderer.domElement );
-    controls.target.set( 0, 0, 0 )
+    controls.target.set(0, 1, 0);
     
-    while(scene.children.length > 0){ 
-      scene.remove(scene.children[0]); 
-    }
-    
+    var light = new THREE.PointLight( 0xffffff, 1 );
+    camera.position.set(0, 1, 10);
+    camera.add( light );
+
     async function parseFile() {
       const blob = new Blob([file!], { type: 'application/gltf-binary' })
       const arraybuffer = await blob.arrayBuffer()
       
       loader.parse(arraybuffer, "", (glb) => {
         scene.add(glb.scene)
-        scene.background = new THREE.Color( "grey" );
+        scene.add(camera)
+        // scene.background = new THREE.Color( "grey" );
       })
     }
     parseFile()
     
-    const light = new THREE.DirectionalLight(0xffffff, 1)
-    light.position.set(2,2,5)
-    scene.add(light)
-    
-    camera.position.z = 5;
     
     function animate() {
       requestAnimationFrame( animate );
