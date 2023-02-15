@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { BsFilter } from 'react-icons/bs';
+import { BsFilter, BsFillArrowDownCircleFill } from 'react-icons/bs';
 import TestThree from "../pages/TestThree";
+import { SendToUE } from "../peer-stream";
 
 function NFTs({actor, principal} : any) {
   const [nfts, setNfts] = useState<any[]>([])
@@ -15,6 +16,11 @@ function NFTs({actor, principal} : any) {
     }
     getUserNfts()
   }, [])
+
+  const handleTransfer = async() => {
+    console.log("cazzo")
+    await SendToUE("data_response@" + "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF-Embedded/Duck.gltf")
+  }
 
   return (
     <div className="nfts-body">
@@ -36,6 +42,9 @@ function NFTs({actor, principal} : any) {
           <div className="nft-card" key={key}>
             <div className="nft-body"><TestThree nft={nft} number={key} /></div>
             <div className="nft-bottom">{nft.metadata[0].name}</div>
+            <div className="nft-buttons">
+              <a onClick={() => {handleTransfer()}}><BsFillArrowDownCircleFill size={30}/></a>
+            </div>
           </div>
         )}
       </div>
