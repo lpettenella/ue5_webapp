@@ -36,8 +36,8 @@ function Market({ isAuthenticated, actor, principal}: any) {
           </div>
           <div className="create-nft-btn">
             <Link to="/create">
-              <span className="add-button-text">Create</span>
-              <span className="add-button-plus">+</span>
+              <span className="add-button-text">Create NFT</span>
+              {/* <span className="add-button-plus">+</span> */}
             </Link>
           </div>
         </div>

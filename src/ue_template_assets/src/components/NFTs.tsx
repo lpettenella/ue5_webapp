@@ -5,6 +5,7 @@ import { SendToUE } from "../peer-stream";
 
 function NFTs({actor, principal} : any) {
   const [nfts, setNfts] = useState<any[]>([])
+  const [loadingTransfer, setLoadingTransfer] = useState(false)
 
   useEffect(() => {
     const getUserNfts = async() => {
@@ -18,8 +19,9 @@ function NFTs({actor, principal} : any) {
   }, [])
 
   const handleTransfer = async() => {
-    console.log("cazzo")
+    setLoadingTransfer(true)
     await SendToUE("data_response@" + "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Duck/glTF-Embedded/Duck.gltf")
+    setLoadingTransfer(false)
   }
 
   return (
@@ -43,11 +45,18 @@ function NFTs({actor, principal} : any) {
             <div className="nft-body"><TestThree nft={nft} number={key} /></div>
             <div className="nft-bottom">{nft.metadata[0].name}</div>
             <div className="nft-buttons">
-              <a onClick={() => {handleTransfer()}}><BsFillArrowDownCircleFill size={30}/></a>
+              <a onClick={() => {handleTransfer()} } title="Transfer NFT to UE">
+                <BsFillArrowDownCircleFill size={30}/>
+              </a>
             </div>
           </div>
         )}
       </div>
+      { loadingTransfer && 
+        <div className="loading-modal">
+          <div className="loading-spinner"></div>
+          <div> Transfering... </div>
+        </div> }
     </div>
   )
 }

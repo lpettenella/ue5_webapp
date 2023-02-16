@@ -42,6 +42,7 @@ main > * > * {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 img {
@@ -60,15 +61,6 @@ form {
   margin: auto;
   align-items: baseline;
 }
-
-/* button {    
-  margin: 20px auto;    
-  width: 200px;
-  height: 40px;
-  border: 1.5px solid #323232;
-  border-radius: 65px;
-  font-weight: 700;
-} */
 
 button.disabled{
   opacity: .5;
@@ -242,27 +234,25 @@ a:hover {
 
 
 .register-form {
-  /* background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 20px; */
   margin-top: 5vh;
   display: flex;
   justify-content: center;
 }
 
 .form-box {
-  /* background-color: rgba(59, 56, 56, 0.7); */
   left: 50%;
   right: 50%;
   width: 50%;
   min-width: 400px;
   padding: 1vh;
-  border-radius: 1vh;
-  /* box-shadow: 0px 0px 1vh rgb(18, 148, 83); */
-  border: 2px solid rgb(18, 148, 83);
+  border-radius: 2vh;
+  border: 2px solid #FFE073;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: rgba(16, 16, 16, 0.82);
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .form-box input {
@@ -275,7 +265,7 @@ a:hover {
 }
 
 .form-submit {
-  background-color:  rgb(16, 197, 107);
+  background-color:  #FFE073;
   color: black;
   margin-bottom: 2vh;
   padding: 10px 20px;
@@ -400,7 +390,6 @@ a:hover {
 
 .nfts-body {
   display: flex;
-  /* justify-content: space-between; */
 }
 
 .nfts-filter {
@@ -463,7 +452,6 @@ a:hover {
   width: 30px;
   border: 1px solid white;
   border-radius: 90%;
-  /* background-color: white; */
 }
 
 .nft-body {
@@ -487,6 +475,95 @@ a:hover {
 
 canvas {
   border-radius: 2vh 2vh 0vh 0;
+}
+
+.loading-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.loading-spinner {
+  display: inline-block;
+  margin: 2vh;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 5px solid #c7c7c7;
+  border-top-color: rgb(255, 220, 94);
+  animation: spin 1s ease-in-out infinite;
+}
+
+/* CREATE */
+
+.create-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 5vh;
+}
+
+.nft-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: auto;
+  height: auto;
+  border: 1px solid white;
+  border-radius: 2vh;
+}
+
+.nft-upload svg {
+  margin-top: 1vh;
+}
+
+.nft-upload:hover > svg {
+  fill: rgb(255, 220, 94);
+}
+
+.nft-upload:hover {
+  color: rgb(255, 220, 94);
+  border-color: rgb(255, 220, 94);
+  cursor: pointer;
+}
+
+.nft-mint {
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+}
+
+.nft-mint button {
+  background-color: rgb(220, 197, 111);
+  font-size: 2vh;
+  color: #222;
+  border: none;
+  border-radius: 2vh;
+  padding: 1vh 2vh;
+  width: 20vh;
+}
+
+.nft-mint button:hover {
+  cursor: pointer;
+  color: black;
+  background-color: rgb(255, 220, 94);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes shine {

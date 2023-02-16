@@ -86,7 +86,11 @@ const App = () => {
 	}, [])
 
 	useEffect(() => {
-		if(!authClient) return
+
+	}, [user])
+
+	useEffect(() => {
+		if(!authClient || !isAuthenticated) return
 
     async function checkUser() {
       const res: UserResult = await actor!.getUser(principal!)
@@ -113,8 +117,11 @@ const App = () => {
 
 	const logout = async() => {
 		await authClient?.logout()
-		setIsAuthenticated?.(false)
+		setIsAuthenticated(false)
+		setUser(undefined)
 	}
+
+
 
 	return (
 		<>
@@ -123,7 +130,7 @@ const App = () => {
 			<Routes>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} createUser={createUser} />} />
         <Route path="/market" element={<Market isAuthenticated={isAuthenticated} actor={actor} principal={principal} />} />
-				<Route path="/create" element={<Create isAuthenticated={isAuthenticated} actor={actor} principal={principal} />} />
+				<Route path="/create" element={<Create user={user} isAuthenticated={isAuthenticated} actor={actor} principal={principal} createUser={createUser} />} />
 				{/* <Route path="/test" element={<TestThree principal={principal} actor={actor} />}></Route> */}
         {/* <Route path="/create" element={<Create isAuthenticated={isAuthenticated} />} />
         <Route path="/token/:id" element={<Token isAuthenticated={isAuthenticated} />} /> */}

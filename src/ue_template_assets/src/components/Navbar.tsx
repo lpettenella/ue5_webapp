@@ -12,9 +12,9 @@ function Navbar({ setModalOpen, logout, isAuthenticated }: NavbarProps) {
     <div className="navbar">
       <div className="title">LucidDoor</div>
       <div className="links">
+        <Link to="/create">Create</Link>
         <Link to="/market">Market</Link>
         <a>Explore</a>
-        <a>Wallet</a>
         { !isAuthenticated?
             <a className="auth-btn" onClick={() => {setModalOpen(true)}}>Login</a> :
             <a className="auth-btn" onClick={() => {logout()}}>Logout</a>
