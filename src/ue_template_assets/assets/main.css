@@ -204,7 +204,7 @@ a:hover {
 
 .authenticate-btn {
   padding: 10px 20px;
-  background-color: rgb(16, 197, 107);
+  background-color: #FFE073;
   color: black;
   border: none;
   border-radius: 1vh;
@@ -571,38 +571,38 @@ canvas {
     background: linear-gradient(
       30deg, 
       hsl(260, 85%, 95%) 0%, 
-      rgb(16, 197, 107) 25%
+      #FFE073 25%
     );
   }
 
   25% {
     background: linear-gradient(
       30deg, 
-      rgb(16, 197, 107) 0%, 
+      #FFE073 0%, 
       hsl(260, 85%, 95%) 25%, 
-      rgb(16, 197, 107) 50%);
+      #FFE073 50%);
   }
 
   50% {
     background: linear-gradient(
       30deg,
-      rgb(16, 197, 107) 0%, 
+      #FFE073 0%, 
       hsl(260, 85%, 95%) 50%, 
-      rgb(16, 197, 107) 75%); 
+      #FFE073 75%); 
   }
 
   75% {
     background: linear-gradient(
       30deg, 
-      rgb(16, 197, 107) 0%, 
+      #FFE073 0%, 
       hsl(260, 85%, 95%) 75%, 
-      rgb(16, 197, 107) 100%); 
+      #FFE073 100%); 
   }
 
   100% {
     background: linear-gradient(
       30deg, 
-      rgb(16, 197, 107) 0%, 
+      #FFE073 0%, 
       hsl(260, 85%, 95%) 100%); 
   }
 }

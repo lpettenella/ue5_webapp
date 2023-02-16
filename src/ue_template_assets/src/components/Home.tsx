@@ -11,7 +11,7 @@ function Home({ isAuthenticated, user, createUser}: any) {
 					<AuthHome />
 				) : user && 'Err' in user ? (
 					<RegisterForm createUser={createUser}/>
-				) : <div>Loading</div>}
+				) : <div>You are not Authenticated! Please click on Login</div>}
         </div>
 			}
 		</>
